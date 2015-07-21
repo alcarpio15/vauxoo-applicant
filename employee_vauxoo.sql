@@ -31,8 +31,11 @@ CREATE TABLE employee (
 	first_name VARCHAR(32) NOT NULL,
 	last_name VARCHAR(32) NOT NULL,
 	department_id INT  NOT NULL,
+	boss_id INT  ,
 	PRIMARY KEY(id),
 	FOREIGN KEY(department_id) REFERENCES employee_department(id)
+	ON DELETE CASCADE,
+	FOREIGN KEY(boss_id) REFERENCES employee(id)
 	ON DELETE CASCADE
 );
 
@@ -61,7 +64,7 @@ INSERT INTO employee_hobby (id, name, description) VALUES (1, 'Artes y Manualida
 INSERT INTO employee_hobby (id, name, description) VALUES (2, 'Deportes', ' ');
 INSERT INTO employee_hobby (id, name, description) VALUES (3, 'Videojuegos', ' ');
 
--- Insertamos Empleados según lo pedido en el Ejercicio sql1
+-- Insertamos Empleados segun lo pedido en el Ejercicio sql1
 -- Nombres al Azar, cortesia de BehindTheName.com. Apellidos escogidos no tan al Azar por otros métodos.
 INSERT INTO employee (id, first_name, last_name, department_id) VALUES (1, 'Felipe Aurelio', 'Gonzalez', 6);
 INSERT INTO employee (id, first_name, last_name, department_id) VALUES (2, 'Eladio Geronimo', 'Villa', 3);
@@ -79,6 +82,8 @@ INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (3, 3);
 INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (4, 2);
 INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (4, 3);
 
-
+-- Definimos la Jerarquia de Empleados para el ejercicio sql3
+UPDATE employee SET boss_id = 1 WHERE id = 4;
+UPDATE employee SET boss_id = 4 WHERE id = 2 OR id = 3;
 
 
