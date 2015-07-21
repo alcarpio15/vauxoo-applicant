@@ -20,6 +20,10 @@ CREATE TABLE employee_department (
 );
 
 CREATE TABLE employee_hobby (
+	id INT NOT NULL,
+	name VARCHAR(64) NOT NULL,
+	description VARCHAR(256),
+	PRIMARY KEY(id)
 );
 
 CREATE TABLE employee (
@@ -33,11 +37,17 @@ CREATE TABLE employee (
 );
 
 CREATE TABLE has_as_hobby (
+	employee_id INT NOT NULL,
+	hobby_id INT NOT NULL,
+	PRIMARY KEY(employee_id, hobby_id),
+	FOREIGN KEY(employee_id) REFERENCES employee(id)
+	ON DELETE CASCADE,
+	FOREIGN KEY(hobby_id) REFERENCES employee_hobby(id)
+	ON DELETE CASCADE
 );
 
 
--- Insertamos Departamentos y Empleados para el Ejercicio sql1
-
+-- Insertamos Departamentos para el Ejercicio sql1
 INSERT INTO employee_department (id, name, description) VALUES (1, 'Produccion', ' ');
 INSERT INTO employee_department (id, name, description) VALUES (2, 'Ventas', ' ');
 INSERT INTO employee_department (id, name, description) VALUES (3, 'Soporte Técnico', ' ');
@@ -45,10 +55,30 @@ INSERT INTO employee_department (id, name, description) VALUES (4, 'Contaduria',
 INSERT INTO employee_department (id, name, description) VALUES (5, 'Recursos Humanos', ' ');
 INSERT INTO employee_department (id, name, description) VALUES (6, 'Comite Directivo', ' ');
 
---Nombres al Azar, cortesia de BehindTheName.com. Apellidos escogidos por otros métodos.
-INSERT INTO employee (id, first_name, last_name, department_id) VALUES(1, 'Felipe Aurelio', 'Gonzalez', 6);
-INSERT INTO employee (id, first_name, last_name, department_id) VALUES(2, 'Eladio Geronimo', 'Villa', 3);
-INSERT INTO employee (id, first_name, last_name, department_id) VALUES(3, 'Adela', 'Alvarez Arevalo', 2);
-INSERT INTO employee (id, first_name, last_name, department_id) VALUES(4, 'Maritza Nuria', 'Ortiz Quevedo', 5);
+-- Insertamos Pasatiempos para el Ejercicio sql2
+-- Pasatiempos escogidos bajo criterio personal a Partir de una lista de los más Populares
+INSERT INTO employee_hobby (id, name, description) VALUES (1, 'Artes y Manualidades', ' ');
+INSERT INTO employee_hobby (id, name, description) VALUES (2, 'Deportes', ' ');
+INSERT INTO employee_hobby (id, name, description) VALUES (3, 'Videojuegos', ' ');
+
+-- Insertamos Empleados según lo pedido en el Ejercicio sql1
+-- Nombres al Azar, cortesia de BehindTheName.com. Apellidos escogidos no tan al Azar por otros métodos.
+INSERT INTO employee (id, first_name, last_name, department_id) VALUES (1, 'Felipe Aurelio', 'Gonzalez', 6);
+INSERT INTO employee (id, first_name, last_name, department_id) VALUES (2, 'Eladio Geronimo', 'Villa', 3);
+INSERT INTO employee (id, first_name, last_name, department_id) VALUES (3, 'Adela', 'Alvarez Arevalo', 2);
+INSERT INTO employee (id, first_name, last_name, department_id) VALUES (4, 'Maritza Nuria', 'Ortiz Quevedo', 5);
+
+-- Relacionamos Empleados con Pasatiempos para el Ejercicio sql2
+-- Pasatiempos escogidos al Azar por medio de Random.org
+INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (1, 2);
+INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (1, 3);
+INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (2, 3);
+INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (2, 1);
+INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (3, 1);
+INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (3, 3);
+INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (4, 2);
+INSERT INTO has_as_hobby (employee_id, hobby_id) VALUES (4, 3);
+
+
 
 
