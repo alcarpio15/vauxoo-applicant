@@ -19,7 +19,7 @@ class PrimeClass(object):
         de un ciclo tipo-Para:
 
         Se asume que el numero puede ser primo antes de iniciar el ciclo
-        (pero despues de Evaluar que el numero en cuestión no sea '1'); y si
+        (pero despues de Evaluar que el numero en cuestion no sea '1'); y si
         durante el recorrido se descubre que es multiplo de algun numero num,
         entonces la Bandera reflejara la contradiccion antes de que el ciclo
         frene por la aplicacion del break.
