@@ -22,3 +22,4 @@ class CalculatorClass(object):
         	a = a + i
 
         return a
+        
